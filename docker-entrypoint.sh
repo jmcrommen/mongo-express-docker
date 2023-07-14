@@ -19,6 +19,32 @@ function wait_tcp_port {
     exec 6>&-
 }
 
+function file_env() {
+	local var="$1"
+	local fileVar="${var}_FILE"
+    
+	if [ "${!fileVar:-}" ]; then
+		local val="$(< "${!fileVar}")"
+        export "$var"="$val"
+	fi
+	unset "$fileVar"
+}
+
+file_env 'ME_CONFIG_MONGODB_URL'
+file_env 'ME_CONFIG_BASICAUTH_USERNAME'
+file_env 'ME_CONFIG_BASICAUTH_PASSWORD'
+file_env 'ME_CONFIG_MONGODB_ENABLE_ADMIN'
+file_env 'ME_CONFIG_OPTIONS_EDITORTHEME'
+file_env 'ME_CONFIG_REQUEST_SIZE'
+file_env 'ME_CONFIG_SITE_BASEURL'
+file_env 'ME_CONFIG_SITE_COOKIESECRET'
+file_env 'ME_CONFIG_SITE_SESSIONSECRET'
+file_env 'ME_CONFIG_SITE_SSL_ENABLED'
+file_env 'ME_CONFIG_SITE_SSL_CRT_PATH'
+file_env 'ME_CONFIG_SITE_SSL_KEY_PATH'
+file_env 'ME_CONFIG_MONGODB_AUTH_DATABASE'
+file_env 'ME_CONFIG_MONGODB_AUTH_USERNAME'
+file_env 'ME_CONFIG_MONGODB_AUTH_PASSWORD'
 
 # TODO: Using ME_CONFIG_MONGODB_SERVER is going to be deprecated, a way to parse connection string
 # is required for checking port health
