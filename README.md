@@ -47,6 +47,11 @@ The following are only needed if `ME_CONFIG_MONGODB_ENABLE_ADMIN` is **"false"**
 	ME_CONFIG_MONGODB_AUTH_USERNAME | 'admin'         | Database username
 	ME_CONFIG_MONGODB_AUTH_PASSWORD | 'pass'          | Database password
 
+
+## Docker Secrets
+
+As an alternative to passing sensitive information via environment variables, _FILE may be appended to the previously listed environment variables, causing the initialization script to load the values for those variables from files present in the container. In particular, this can be used to load passwords from Docker secrets stored in /run/secrets/<secret_name> files.
+
 ## Example
 
 	docker run -it --rm \
